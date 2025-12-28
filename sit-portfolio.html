@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Impact Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #0f0f1a;
+            color: #e4e4e7;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            margin: 0 auto 30px;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 25px;
+            right: 40px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+            font-weight: 300;
+        }
+
+        /* 슬라이드 1: 표지 - 심플 */
+        .cover {
+            background: #0f0f1a;
+            display: flex;
+            align-items: center;
+            padding: 0 100px;
+        }
+
+        .cover-content {
+            width: 100%;
+        }
+
+        .cover h1 {
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .cover .tagline {
+            font-size: 24px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 50px;
+        }
+
+        .cover .meta {
+            display: flex;
+            gap: 40px;
+        }
+
+        .cover .meta-item {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .cover .meta-item span {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* 스토리 슬라이드 */
+        .story {
+            background: #0f0f1a;
+            padding: 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 720px;
+        }
+
+        .story-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .story-number {
+            font-size: 80px;
+            font-weight: 900;
+            color: #4a90d9;
+            opacity: 0.3;
+            margin-right: 30px;
+            line-height: 1;
+        }
+
+        .story-title {
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .story-text h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #4a90d9;
+            margin-bottom: 15px;
+        }
+
+        .story-text p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 20px;
+        }
+
+        .story-text ul {
+            list-style: none;
+        }
+
+        .story-text li {
+            font-size: 14px;
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .story-text li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #4a90d9;
+        }
+
+        .story-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .tech-item {
+            background: rgba(74,144,217,0.1);
+            border: 1px solid rgba(74,144,217,0.2);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* 결과 슬라이드 */
+        .result {
+            background: #0f0f1a;
+            padding: 60px 100px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-header {
+            margin-bottom: 50px;
+        }
+
+        .result-header h2 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .result-header p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .result-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            flex: 1;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .stat-card .number {
+            font-size: 48px;
+            font-weight: 900;
+            color: #4a90d9;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .result-link {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .link-card {
+            background: linear-gradient(135deg, #4a90d9 0%, #2d6cb5 100%);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .link-card h3 {
+            font-size: 18px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 15px;
+        }
+
+        .link-card .url {
+            font-size: 36px;
+            font-weight: 900;
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .link-card .hint {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .result-tech {
+            margin-top: 40px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .result-tech span {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        @media print {
+            .slide { margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 1. 표지 -->
+<div class="slide cover">
+    <div class="cover-content">
+        <h1>Social Impact Tracker</h1>
+        <p class="tagline">기업 ESG 데이터 시각화 플랫폼</p>
+        
+        <div class="meta">
+            <div class="meta-item">역할 <span>Full-Stack</span></div>
+            <div class="meta-item">기간 <span>2개월</span></div>
+            <div class="meta-item">유형 <span>개인 프로젝트</span></div>
+        </div>
+    </div>
+    <div class="slide-number">1 / 7</div>
+</div>
+
+<!-- 2. 문제 인식 -->
+<div class="slide story">
+    <div class="story-header">
+        <span class="story-number">01</span>
+        <h2 class="story-title">프로젝트 배경</h2>
+    </div>
+    
+    <div class="story-content">
+        <div class="story-text">
+            <h3>발견한 문제</h3>
+            <p>
+                ESG 경영이 화두가 되면서 기업들의 사회공헌 데이터는 넘쳐났습니다.
+                하지만 데이터들은 공시자료, 지속가능경영보고서, 뉴스 기사 등에 
+                흩어져 있어 한눈에 비교하기 어려웠습니다.
+            </p>
+
+            <h3 style="margin-top: 30px;">목표</h3>
+            <ul>
+                <li>흩어진 ESG 데이터를 한곳에 수집</li>
+                <li>기업 간 비교가 가능한 대시보드</li>
+                <li>긍정적 뉴스 자동 수집 및 분류</li>
+            </ul>
+        </div>
+        
+        <div class="story-box">
+            <h3 style="margin-bottom: 20px; font-size: 16px; color: #4a90d9;">데이터 소스</h3>
+            <p style="font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7;">
+                <strong style="color: #fff;">OpenDart API</strong><br>
+                금융감독원 전자공시시스템 기업 공시 데이터<br><br>
+                
+                <strong style="color: #fff;">Naver News API</strong><br>
+                기업별 ESG 키워드 뉴스 수집 및 필터링
+            </p>
+        </div>
+    </div>
+    <div class="slide-number">2 / 7</div>
+</div>
+
+<!-- 3. 기술 스택 -->
+<div class="slide story">
+    <div class="story-header">
+        <span class="story-number">02</span>
+        <h2 class="story-title">기술 스택</h2>
+    </div>
+    
+    <div class="story-content">
+        <div class="story-text">
+            <h3>Backend</h3>
+            <p>
+                Spring Boot로 REST API를 구현하고, 
+                WebClient로 외부 API 데이터를 비동기로 수집했습니다.
+                JPA와 MySQL로 데이터를 관리합니다.
+            </p>
+            
+            <h3 style="margin-top: 25px;">Frontend</h3>
+            <p>
+                React + Vite로 SPA를 구현하고, 
+                Recharts로 차트를 시각화했습니다.
+            </p>
+
+            <h3 style="margin-top: 25px;">배포</h3>
+            <p>
+                백엔드는 Railway, 프론트엔드는 Netlify에 배포하여
+                24시간 서비스를 운영합니다.
+            </p>
+        </div>
+        
+        <div class="story-box">
+            <h3 style="margin-bottom: 15px; font-size: 16px; color: #4a90d9;">사용 기술</h3>
+            <div class="tech-grid">
+                <div class="tech-item">Java 17</div>
+                <div class="tech-item">Spring Boot</div>
+                <div class="tech-item">JPA</div>
+                <div class="tech-item">React 18</div>
+                <div class="tech-item">Vite</div>
+                <div class="tech-item">Recharts</div>
+                <div class="tech-item">MySQL</div>
+                <div class="tech-item">Railway</div>
+                <div class="tech-item">Netlify</div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">3 / 7</div>
+</div>
+
+<!-- 4. 주요 기능 -->
+<div class="slide story">
+    <div class="story-header">
+        <span class="story-number">03</span>
+        <h2 class="story-title">주요 기능</h2>
+    </div>
+    
+    <div class="story-content">
+        <div class="story-text">
+            <h3>대시보드</h3>
+            <p>
+                등록 기업 수, 뉴스 수, 총 기부금, 배출량 등 
+                핵심 지표를 한눈에 보여줍니다.
+            </p>
+            
+            <h3 style="margin-top: 25px;">긍정 뉴스</h3>
+            <p>
+                기업별 ESG 뉴스를 자동 수집하고, 
+                부정적 키워드를 필터링하여 긍정적 활동만 표시합니다.
+            </p>
+            
+            <h3 style="margin-top: 25px;">데이터 시각화</h3>
+            <p>
+                연도별 트렌드, 기업별 비교 차트를 
+                Recharts로 구현했습니다.
+            </p>
+        </div>
+        
+        <div class="story-box">
+            <h3 style="margin-bottom: 20px; font-size: 16px; color: #4a90d9;">기능 목록</h3>
+            <ul style="list-style: none;">
+                <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; color: rgba(255,255,255,0.7);">
+                    <strong style="color: #fff;">대시보드</strong> — KPI 요약
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; color: rgba(255,255,255,0.7);">
+                    <strong style="color: #fff;">긍정 뉴스</strong> — 자동 수집 + 분류
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; color: rgba(255,255,255,0.7);">
+                    <strong style="color: #fff;">배출량</strong> — 온실가스 트렌드
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; color: rgba(255,255,255,0.7);">
+                    <strong style="color: #fff;">기부금</strong> — 사회공헌 금액
+                </li>
+                <li style="padding: 10px 0; font-size: 14px; color: rgba(255,255,255,0.7);">
+                    <strong style="color: #fff;">기업 관리</strong> — 목록 + 검색
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="slide-number">4 / 7</div>
+</div>
+
+<!-- 5. 아키텍처 -->
+<div class="slide story">
+    <div class="story-header">
+        <span class="story-number">04</span>
+        <h2 class="story-title">시스템 구성</h2>
+    </div>
+    
+    <div class="story-content" style="grid-template-columns: 1fr;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 30px; margin-bottom: 40px;">
+            <div style="background: rgba(74,144,217,0.15); border: 2px solid #4a90d9; border-radius: 16px; padding: 25px 35px; text-align: center;">
+                <div style="font-size: 36px; margin-bottom: 8px;">⚛️</div>
+                <div style="font-weight: 700; font-size: 15px;">React</div>
+                <div style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 4px;">Netlify</div>
+            </div>
+            <div style="color: #4a90d9; font-size: 24px;">→</div>
+            <div style="background: rgba(74,144,217,0.15); border: 2px solid #4a90d9; border-radius: 16px; padding: 25px 35px; text-align: center;">
+                <div style="font-size: 36px; margin-bottom: 8px;">🍃</div>
+                <div style="font-weight: 700; font-size: 15px;">Spring Boot</div>
+                <div style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 4px;">Railway</div>
+            </div>
+            <div style="color: #4a90d9; font-size: 24px;">→</div>
+            <div style="background: rgba(74,144,217,0.15); border: 2px solid #4a90d9; border-radius: 16px; padding: 25px 35px; text-align: center;">
+                <div style="font-size: 36px; margin-bottom: 8px;">🐬</div>
+                <div style="font-weight: 700; font-size: 15px;">MySQL</div>
+                <div style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 4px;">Railway</div>
+            </div>
+            <div style="color: #4a90d9; font-size: 24px;">←</div>
+            <div style="background: rgba(74,144,217,0.15); border: 2px solid #4a90d9; border-radius: 16px; padding: 25px 35px; text-align: center;">
+                <div style="font-size: 36px; margin-bottom: 8px;">🌐</div>
+                <div style="font-weight: 700; font-size: 15px;">외부 API</div>
+                <div style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 4px;">Dart, Naver</div>
+            </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px;">
+            <div class="story-box">
+                <h3 style="margin-bottom: 12px; font-size: 15px; color: #4a90d9;">Frontend</h3>
+                <p style="font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6;">
+                    React 18 + Vite<br>
+                    Netlify CDN 배포<br>
+                    커스텀 도메인 연결
+                </p>
+            </div>
+            <div class="story-box">
+                <h3 style="margin-bottom: 12px; font-size: 15px; color: #4a90d9;">Backend</h3>
+                <p style="font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6;">
+                    Spring Boot 3.2<br>
+                    Railway Docker<br>
+                    REST API 15+ 엔드포인트
+                </p>
+            </div>
+            <div class="story-box">
+                <h3 style="margin-bottom: 12px; font-size: 15px; color: #4a90d9;">Database</h3>
+                <p style="font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6;">
+                    MySQL 8.0<br>
+                    6개 테이블<br>
+                    JPA Auditing
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">5 / 7</div>
+</div>
+
+<!-- 6. 트러블슈팅 -->
+<div class="slide story">
+    <div class="story-header">
+        <span class="story-number">05</span>
+        <h2 class="story-title">트러블슈팅</h2>
+    </div>
+    
+    <div class="story-content">
+        <div class="story-text">
+            <h3>OpenDart API 응답 파싱</h3>
+            <p>
+                XML/JSON 혼합 응답 구조. 
+                응답 포맷을 분석하고 DTO 매핑 로직 구현.
+            </p>
+            
+            <h3 style="margin-top: 25px;">Naver API 호출 제한</h3>
+            <p>
+                일일 요청 한도 초과 시 429 에러.
+                요청 간격 조절 및 배치 처리로 해결.
+            </p>
+            
+            <h3 style="margin-top: 25px;">Railway 502 오류</h3>
+            <p>
+                <code style="background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px;">server.address=0.0.0.0</code> 설정으로 해결.
+            </p>
+            
+            <h3 style="margin-top: 25px;">CORS / Netlify 빌드</h3>
+            <p>
+                CorsFilter Bean 등록, package-lock 삭제로 해결.
+            </p>
+        </div>
+        
+        <div class="story-box">
+            <h3 style="margin-bottom: 20px; font-size: 16px; color: #4a90d9;">배운 점</h3>
+            <p style="font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8;">
+                <strong style="color: #fff;">외부 API 연동</strong><br>
+                OpenDart, Naver API의 응답 구조를 분석하고, 
+                WebClient로 비동기 데이터 수집 파이프라인을 구축했습니다.<br><br>
+                
+                <strong style="color: #fff;">데이터 정제</strong><br>
+                뉴스 데이터에서 부정적 키워드를 필터링하고, 
+                중복 제거 및 카테고리 분류 로직을 설계했습니다.<br><br>
+                
+                <strong style="color: #fff;">클라우드 배포</strong><br>
+                로컬과 프로덕션 환경의 차이를 이해하고, 
+                환경변수와 포트 바인딩 설정을 학습했습니다.
+            </p>
+        </div>
+    </div>
+    <div class="slide-number">6 / 7</div>
+</div>
+
+<!-- 7. 결과 및 링크 -->
+<div class="slide story">
+    <div class="story-header">
+        <span class="story-number">06</span>
+        <h2 class="story-title">완성된 서비스</h2>
+    </div>
+    
+    <div class="story-content">
+        <div style="display: flex; flex-direction: column; gap: 30px;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                <div style="text-align: center;">
+                    <div style="font-size: 42px; font-weight: 900; color: #4a90d9;">10+</div>
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 5px;">React 페이지</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 42px; font-weight: 900; color: #4a90d9;">15+</div>
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 5px;">API 엔드포인트</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 42px; font-weight: 900; color: #4a90d9;">6</div>
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 5px;">DB 테이블</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 42px; font-weight: 900; color: #4a90d9;">2</div>
+                    <div style="font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 5px;">외부 API</div>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <span style="background: rgba(74,144,217,0.15); border: 1px solid rgba(74,144,217,0.3); padding: 8px 16px; border-radius: 6px; font-size: 13px;">Spring Boot</span>
+                <span style="background: rgba(74,144,217,0.15); border: 1px solid rgba(74,144,217,0.3); padding: 8px 16px; border-radius: 6px; font-size: 13px;">React</span>
+                <span style="background: rgba(74,144,217,0.15); border: 1px solid rgba(74,144,217,0.3); padding: 8px 16px; border-radius: 6px; font-size: 13px;">MySQL</span>
+                <span style="background: rgba(74,144,217,0.15); border: 1px solid rgba(74,144,217,0.3); padding: 8px 16px; border-radius: 6px; font-size: 13px;">Railway</span>
+                <span style="background: rgba(74,144,217,0.15); border: 1px solid rgba(74,144,217,0.3); padding: 8px 16px; border-radius: 6px; font-size: 13px;">Netlify</span>
+                <span style="background: rgba(74,144,217,0.15); border: 1px solid rgba(74,144,217,0.3); padding: 8px 16px; border-radius: 6px; font-size: 13px;">OpenDart</span>
+                <span style="background: rgba(74,144,217,0.15); border: 1px solid rgba(74,144,217,0.3); padding: 8px 16px; border-radius: 6px; font-size: 13px;">Naver API</span>
+            </div>
+        </div>
+        
+        <div class="story-box" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            <p style="font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 15px;">서비스 바로가기</p>
+            <a href="https://sitrack.site" target="_blank" style="font-size: 32px; font-weight: 900; color: #4a90d9; text-decoration: none;">sitrack.site</a>
+            <p style="font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 15px;">클릭해서 직접 확인해보세요</p>
+        </div>
+    </div>
+    <div class="slide-number">7 / 7</div>
+</div>
+
+</body>
+</html>

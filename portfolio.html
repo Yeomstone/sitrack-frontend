@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debate Platform - 포트폴리오</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: 1280px 720px;
+            margin: 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #FFC107;
+            color: #000;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            margin: 0 auto 30px;
+            background: #FFC107;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+            page-break-inside: avoid;
+            padding: 60px 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 18px;
+            right: 25px;
+            font-size: 11px;
+            color: rgba(0,0,0,0.25);
+        }
+
+        h1 {
+            font-size: 52px;
+            font-weight: 900;
+            color: #000;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #000;
+            margin-bottom: 25px;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(0,0,0,0.8);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .grid-5 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .card {
+            background: rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #000;
+            color: #FFC107;
+            padding: 5px 11px;
+            border-radius: 5px;
+            font-size: 11px;
+            margin: 3px;
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            font-size: 13px;
+            padding: 5px 0;
+            padding-left: 14px;
+            position: relative;
+            color: rgba(0,0,0,0.75);
+            line-height: 1.45;
+        }
+
+        ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #000;
+        }
+
+        /* 아키텍처 */
+        .arch-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .arch-box {
+            background: #000;
+            border-radius: 10px;
+            padding: 16px 22px;
+            text-align: center;
+            color: #FFC107;
+            min-width: 140px;
+        }
+
+        .arch-icon {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .arch-title {
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .arch-sub {
+            font-size: 10px;
+            color: rgba(255,193,7,0.7);
+            margin-top: 2px;
+        }
+
+        .arch-arrow {
+            color: #000;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 플로우 */
+        .flow-step {
+            background: #000;
+            color: #FFC107;
+            border-radius: 5px;
+            padding: 10px 14px;
+            font-size: 12px;
+            font-weight: 500;
+            margin: 4px 0;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            color: #000;
+            font-size: 12px;
+        }
+
+        /* 담당역할 */
+        .role-box {
+            background: rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .role-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+        }
+
+        .role-tech {
+            font-size: 10px;
+            color: rgba(0,0,0,0.5);
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* 링크 */
+        .link-box {
+            background: #000;
+            border-radius: 12px;
+            padding: 30px 50px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .link-url {
+            font-size: 36px;
+            font-weight: 900;
+            color: #FFC107;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .link-copy {
+            font-size: 12px;
+            color: rgba(255,193,7,0.7);
+        }
+
+        /* 하이라이트 (검은선 제거) */
+        .highlight {
+            background: rgba(0,0,0,0.06);
+            padding: 12px 15px;
+            border-radius: 8px;
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 12px;
+        }
+
+        .stat-num {
+            font-size: 28px;
+            font-weight: 900;
+            color: #000;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: rgba(0,0,0,0.5);
+            margin-top: 4px;
+        }
+
+        /* DB 테이블 (검은선 제거) */
+        .db-item {
+            background: rgba(0,0,0,0.05);
+            border-radius: 5px;
+            padding: 8px 12px;
+            margin: 4px 0;
+        }
+
+        .db-name {
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .db-desc {
+            font-size: 10px;
+            color: rgba(0,0,0,0.5);
+        }
+
+        @media print {
+            .slide { margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 1. 표지 -->
+<div class="slide">
+    <div class="center">
+        <h1 style="margin-bottom: 10px;">Debate Platform</h1>
+        <p style="font-size: 20px; margin-bottom: 30px;">실시간 토론 플랫폼</p>
+        
+        <div style="margin-bottom: 35px;">
+            <span class="tag">Spring Boot</span>
+            <span class="tag">React</span>
+            <span class="tag">WebSocket</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">AWS</span>
+        </div>
+        
+        <p style="font-size: 14px; color: rgba(0,0,0,0.5);">Full-Stack 팀 프로젝트 | 2025</p>
+    </div>
+    <div class="slide-number">1 / 10</div>
+</div>
+
+<!-- 2. 프로젝트 개요 -->
+<div class="slide">
+    <h2>프로젝트 개요</h2>
+    
+    <div class="grid-2">
+        <div>
+            <h3>프로젝트 소개</h3>
+            <p style="margin-bottom: 15px;">
+                다양한 주제에 대해 찬성/반대 입장을 선택하고, 
+                댓글과 실시간 채팅으로 의견을 나눌 수 있는 <br>온라인 토론 플랫폼입니다.
+            </p>
+            
+            <div class="highlight" style="margin-bottom: 15px;">
+                <h3 style="margin-bottom: 5px;">핵심 가치</h3>
+                <p>다양한 의견이 공존하는 건강한 토론 문화 형성</p>
+            </div>
+            
+            <h3>주요 특징</h3>
+            <ul>
+                <li>찬성/반대 입장 선택 후 토론 참여</li>
+                <li>토론별 실시간 채팅방 운영</li>
+                <li>토론 기간 설정 (예정/진행중/종료)</li>
+                <li>카테고리별 토론 분류</li>
+                <li>인기 토론 랭킹 시스템</li>
+            </ul>
+        </div>
+        
+        <div>
+            <h3>개발 정보</h3>
+            <div class="card" style="margin-bottom: 15px;">
+                <ul>
+                    <li><strong>개발 기간:</strong> 약 2개월</li>
+                    <li><strong>개발 인원:</strong> 4명 팀 프로젝트</li>
+                    <li><strong>담당 역할:</strong> Full-Stack 개발</li>
+                    <li><strong>배포 환경:</strong> AWS EC2 (Ubuntu)</li>
+                    <li><strong>서비스 URL:</strong> https://debate.me.kr</li>
+                </ul>
+            </div>
+            
+            <h3>서비스 구성</h3>
+            <div class="grid-2" style="gap: 10px;">
+                <div class="card">
+                    <p style="font-size: 12px;"><strong>User App</strong></p>
+                    <p style="font-size: 11px; color: rgba(0,0,0,0.5);">일반 사용자 토론 참여</p>
+                </div>
+                <div class="card">
+                    <p style="font-size: 12px;"><strong>Admin App</strong></p>
+                    <p style="font-size: 11px; color: rgba(0,0,0,0.5);">관리자 콘텐츠 관리</p>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 15px;">기술 요약</h3>
+            <div>
+                <span class="tag">Spring Boot</span>
+                <span class="tag">React</span>
+                <span class="tag">WebSocket</span>
+                <span class="tag">MySQL</span>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">2 / 10</div>
+</div>
+
+<!-- 3. 기술 스택 -->
+<div class="slide">
+    <h2>기술 스택</h2>
+    
+    <div class="grid-3" style="margin-bottom: 20px;">
+        <div class="card">
+            <h3>Backend</h3>
+            <div>
+                <span class="tag">Java 17</span>
+                <span class="tag">Spring Boot 3.2</span>
+                <span class="tag">Spring Security</span>
+                <span class="tag">Spring Data JPA</span>
+                <span class="tag">WebSocket</span>
+                <span class="tag">STOMP</span>
+                <span class="tag">JWT</span>
+                <span class="tag">Gradle</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>Frontend</h3>
+            <div>
+                <span class="tag">React 18</span>
+                <span class="tag">React Router 6</span>
+                <span class="tag">Vite</span>
+                <span class="tag">Axios</span>
+                <span class="tag">Context API</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">SockJS</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>Infra & DB</h3>
+            <div>
+                <span class="tag">MySQL 8.0</span>
+                <span class="tag">AWS EC2</span>
+                <span class="tag">Ubuntu</span>
+                <span class="tag">Nginx</span>
+                <span class="tag">Let's Encrypt</span>
+                <span class="tag">Systemd</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="grid-2">
+        <div>
+            <h3>데이터베이스 구조 (10 Tables)</h3>
+            <div class="grid-2" style="gap: 6px;">
+                <div class="db-item">
+                    <div class="db-name">users</div>
+                    <div class="db-desc">회원 정보</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-name">debates</div>
+                    <div class="db-desc">토론 정보</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-name">comments</div>
+                    <div class="db-desc">댓글 (계층형)</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-name">chat_messages</div>
+                    <div class="db-desc">채팅 메시지</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-name">debate_opinions</div>
+                    <div class="db-desc">찬반 입장</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-name">messages</div>
+                    <div class="db-desc">쪽지</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-name">likes</div>
+                    <div class="db-desc">좋아요</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-name">bookmarks</div>
+                    <div class="db-desc">북마크</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-name">reports</div>
+                    <div class="db-desc">신고</div>
+                </div>
+                <div class="db-item">
+                    <div class="db-name">blocks</div>
+                    <div class="db-desc">차단</div>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <h3>개발 도구</h3>
+            <div class="card" style="margin-bottom: 12px;">
+                <ul>
+                    <li>IDE: IntelliJ IDEA, VS Code</li>
+                    <li>버전 관리: Git, GitHub, Git Fork</li>
+                    <li>API 테스트: Postman, Swagger</li>
+                    <li>배포 자동화: PowerShell 스크립트</li>
+                </ul>
+            </div>
+            
+            <h3>코드 품질</h3>
+            <div class="card">
+                <ul>
+                    <li>계층형 아키텍처 (Controller-Service-Repository)</li>
+                    <li>DTO 패턴으로 요청/응답 분리</li>
+                    <li>JPA Auditing (생성/수정 시간 자동화)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-number">3 / 10</div>
+</div>
+
+<!-- 4. 시스템 아키텍처 -->
+<div class="slide">
+    <h2>시스템 아키텍처</h2>
+    
+    <div class="arch-flow">
+        <div class="arch-box">
+            <div class="arch-icon">⚛️</div>
+            <div class="arch-title">React</div>
+            <div class="arch-sub">Frontend (Vite)</div>
+        </div>
+        <span class="arch-arrow">→</span>
+        <div class="arch-box">
+            <div class="arch-icon">🔷</div>
+            <div class="arch-title">Nginx</div>
+            <div class="arch-sub">Reverse Proxy / SSL</div>
+        </div>
+        <span class="arch-arrow">→</span>
+        <div class="arch-box">
+            <div class="arch-icon">🍃</div>
+            <div class="arch-title">Spring Boot</div>
+            <div class="arch-sub">REST API / WebSocket</div>
+        </div>
+        <span class="arch-arrow">→</span>
+        <div class="arch-box">
+            <div class="arch-icon">🐬</div>
+            <div class="arch-title">MySQL</div>
+            <div class="arch-sub">Database</div>
+        </div>
+    </div>
+    
+    <div class="grid-2" style="margin-bottom: 20px;">
+        <div class="highlight">
+            <h3 style="margin-bottom: 5px;">User Application</h3>
+            <p style="font-size: 13px;">일반 사용자 토론 참여 플랫폼</p>
+            <p style="font-size: 11px; color: rgba(0,0,0,0.5); margin-top: 5px;">debate.me.kr | Port 9001</p>
+        </div>
+        <div class="highlight">
+            <h3 style="margin-bottom: 5px;">Admin Application</h3>
+            <p style="font-size: 13px;">관리자 콘텐츠 관리 시스템</p>
+            <p style="font-size: 11px; color: rgba(0,0,0,0.5); margin-top: 5px;">admin.debate.me.kr | Port 9101</p>
+        </div>
+    </div>
+    
+    <div class="grid-2">
+        <div>
+            <h3>JWT 인증 플로우</h3>
+            <div class="flow-step">1. 로그인 요청 (Email + Password)</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">2. BCrypt 비밀번호 검증</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">3. JWT 토큰 발급 (24시간 유효)</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">4. Authorization Header로 API 요청</div>
+        </div>
+        
+        <div>
+            <h3>실시간 채팅 플로우</h3>
+            <div class="flow-step">1. 토론 상세 페이지 입장</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">2. WebSocket 연결 (/ws/chat)</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">3. 토론 ID 기반 채팅방 구독 (STOMP)</div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">4. 메시지 송수신 + DB 저장</div>
+        </div>
+    </div>
+    <div class="slide-number">4 / 10</div>
+</div>
+
+<!-- 5. 주요 기능 -->
+<div class="slide">
+    <h2>주요 기능</h2>
+    
+    <div class="grid-3">
+        <div class="card">
+            <h3>토론</h3>
+            <ul>
+                <li>토론 생성/수정/삭제</li>
+                <li>카테고리별 분류</li>
+                <li>기간 설정 (예정/진행/종료)</li>
+                <li>찬성/반대 입장 선택</li>
+                <li>좋아요 / 북마크</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>댓글</h3>
+            <ul>
+                <li>댓글 작성</li>
+                <li>대댓글 (계층형)</li>
+                <li>수정 / 삭제</li>
+                <li>댓글 신고</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>실시간 채팅</h3>
+            <ul>
+                <li>WebSocket + STOMP</li>
+                <li>토론별 채팅방</li>
+                <li>토론 기간 중 활성화</li>
+                <li>실시간 메시지 수신</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>신고 & 차단</h3>
+            <ul>
+                <li>토론/댓글/사용자 신고</li>
+                <li>사용자 차단 기능</li>
+                <li>차단 시 콘텐츠 숨김</li>
+                <li>관리자 검토 처리</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>쪽지</h3>
+            <ul>
+                <li>1:1 쪽지 송수신</li>
+                <li>읽음/안읽음 상태</li>
+                <li>받은함 / 보낸함</li>
+                <li>쪽지 삭제</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>랭킹 & 마이페이지</h3>
+            <ul>
+                <li>인기 토론 TOP 10</li>
+                <li>활동 기반 사용자 순위</li>
+                <li>프로필 조회/수정</li>
+                <li>북마크 관리</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div style="display: flex; gap: 15px; margin-top: 20px; justify-content: center;">
+        <div class="card stat">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">React 페이지</div>
+        </div>
+        <div class="card stat">
+            <div class="stat-num">15+</div>
+            <div class="stat-label">API 엔드포인트</div>
+        </div>
+        <div class="card stat">
+            <div class="stat-num">10</div>
+            <div class="stat-label">DB 테이블</div>
+        </div>
+        <div class="card stat">
+            <div class="stat-num">2</div>
+            <div class="stat-label">독립 앱</div>
+        </div>
+    </div>
+    <div class="slide-number">5 / 10</div>
+</div>
+
+<!-- 6. 담당 역할 1 -->
+<div class="slide">
+    <h2>담당 역할 (1/2)</h2>
+    
+    <div class="grid-2">
+        <div class="role-box">
+            <div class="role-title">실시간 채팅 시스템</div>
+            <ul>
+                <li>WebSocket + STOMP 프로토콜 구현</li>
+                <li>토론별 채팅방 자동 생성/관리</li>
+                <li>실시간 메시지 브로드캐스트</li>
+                <li>채팅 메시지 DB 저장 및 조회</li>
+                <li>토론 기간 기반 채팅 활성화 제어</li>
+            </ul>
+            <div class="role-tech">Spring WebSocket, STOMP, SockJS, React useEffect</div>
+        </div>
+        
+        <div class="role-box">
+            <div class="role-title">메인 홈페이지 UI</div>
+            <ul>
+                <li>JavaScript 기반 풀페이지 스크롤</li>
+                <li>페이지네이션 인디케이터</li>
+                <li>인기/최신 토론 탭 전환</li>
+                <li>Hero 섹션 CSS 애니메이션</li>
+                <li>반응형 디자인 + 다크모드 지원</li>
+            </ul>
+            <div class="role-tech">React, CSS Animation, JavaScript Scroll Event</div>
+        </div>
+        
+        <div class="role-box">
+            <div class="role-title">AWS 서버 구축</div>
+            <ul>
+                <li>EC2 인스턴스 생성 및 설정</li>
+                <li>Nginx 리버스 프록시 구성</li>
+                <li>Let's Encrypt SSL 인증서 적용</li>
+                <li>Systemd 서비스 자동화</li>
+                <li>PowerShell 배포 스크립트 작성</li>
+            </ul>
+            <div class="role-tech">AWS EC2, Ubuntu, Nginx, Systemd, PowerShell</div>
+        </div>
+        
+        <div class="role-box">
+            <div class="role-title">신고 & 차단 시스템</div>
+            <ul>
+                <li>토론/댓글/사용자 신고 API 구현</li>
+                <li>신고 사유 분류 및 처리 로직</li>
+                <li>사용자 차단 기능 구현</li>
+                <li>차단된 사용자 콘텐츠 필터링</li>
+                <li>관리자 신고 검토 페이지 연동</li>
+            </ul>
+            <div class="role-tech">Spring Boot, JPA Repository, React Modal Component</div>
+        </div>
+    </div>
+    <div class="slide-number">6 / 10</div>
+</div>
+
+<!-- 7. 담당 역할 2 -->
+<div class="slide">
+    <h2>담당 역할 (2/2)</h2>
+    
+    <div class="grid-3" style="margin-bottom: 25px;">
+        <div class="role-box">
+            <div class="role-title">쪽지 시스템</div>
+            <ul>
+                <li>1:1 쪽지 송수신 API</li>
+                <li>읽음/안읽음 상태 관리</li>
+                <li>받은함/보낸함 분리 조회</li>
+                <li>쪽지 목록 페이지네이션</li>
+            </ul>
+            <div class="role-tech">REST API, JPA, React</div>
+        </div>
+        
+        <div class="role-box">
+            <div class="role-title">랭킹 시스템</div>
+            <ul>
+                <li>토론 인기순 정렬 쿼리</li>
+                <li>활동 기반 사용자 점수 계산</li>
+                <li>포디움 형식 UI 구현</li>
+                <li>실시간 순위 업데이트</li>
+            </ul>
+            <div class="role-tech">JPA Query, CSS Animation</div>
+        </div>
+        
+        <div class="role-box">
+            <div class="role-title">마이페이지</div>
+            <ul>
+                <li>프로필 정보 조회/수정</li>
+                <li>활동 내역 탭 (토론/댓글)</li>
+                <li>북마크 목록 관리</li>
+                <li>차단 사용자 관리</li>
+            </ul>
+            <div class="role-tech">React, Axios, FormData</div>
+        </div>
+    </div>
+    
+    <div class="card" style="padding: 20px;">
+        <div style="display: flex; justify-content: space-around; text-align: center;">
+            <div>
+                <div class="stat-num">7+</div>
+                <div class="stat-label">핵심 기능 구현</div>
+            </div>
+            <div>
+                <div class="stat-num">Full-Stack</div>
+                <div class="stat-label">Frontend + Backend</div>
+            </div>
+            <div>
+                <div class="stat-num">AWS</div>
+                <div class="stat-label">서버 구축 & 배포</div>
+            </div>
+            <div>
+                <div class="stat-num">WebSocket</div>
+                <div class="stat-label">실시간 통신 구현</div>
+            </div>
+        </div>
+    </div>
+    
+    <h3 style="margin-top: 20px;">담당 기능 요약</h3>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <span class="tag">실시간 채팅</span>
+        <span class="tag">메인 홈 UI</span>
+        <span class="tag">AWS 서버</span>
+        <span class="tag">신고 시스템</span>
+        <span class="tag">차단 시스템</span>
+        <span class="tag">쪽지 시스템</span>
+        <span class="tag">랭킹</span>
+        <span class="tag">마이페이지</span>
+    </div>
+    <div class="slide-number">7 / 10</div>
+</div>
+
+<!-- 8. 프로젝트 규모 -->
+<div class="slide">
+    <h2>프로젝트 규모</h2>
+    
+    <div class="grid-2" style="margin-bottom: 20px;">
+        <div class="card">
+            <h3>Backend 구성</h3>
+            <ul>
+                <li>Controller: 8개 (Auth, Debate, Comment, Chat...)</li>
+                <li>Service: 10개 (비즈니스 로직 분리)</li>
+                <li>Repository: 10개 (JPA 데이터 접근)</li>
+                <li>Entity: 10개 (JPA 엔티티)</li>
+                <li>DTO: 다수 (요청/응답 분리)</li>
+                <li>WebSocket Config: 실시간 통신 설정</li>
+                <li>Security Config: JWT 인증 필터</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Frontend 구성</h3>
+            <ul>
+                <li>Pages: 15+ (라우팅 페이지)</li>
+                <li>Components: 20+ (재사용 컴포넌트)</li>
+                <li>Services: 10+ (API 통신 모듈)</li>
+                <li>Context: 2개 (Auth, Theme)</li>
+                <li>CSS: 32개 (스타일시트)</li>
+                <li>다크모드: 완벽 지원</li>
+                <li>반응형: 모바일/태블릿/데스크톱</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="grid-4">
+        <div class="card stat">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">React 페이지</div>
+        </div>
+        <div class="card stat">
+            <div class="stat-num">15+</div>
+            <div class="stat-label">API 엔드포인트</div>
+        </div>
+        <div class="card stat">
+            <div class="stat-num">10</div>
+            <div class="stat-label">DB 테이블</div>
+        </div>
+        <div class="card stat">
+            <div class="stat-num">32</div>
+            <div class="stat-label">CSS 파일</div>
+        </div>
+    </div>
+    
+    <h3 style="margin-top: 20px;">배포 자동화 스크립트</h3>
+    <div class="grid-4" style="gap: 10px;">
+        <div class="db-item">
+            <div class="db-name">deploy-backend.ps1</div>
+            <div class="db-desc">백엔드 빌드 & 배포</div>
+        </div>
+        <div class="db-item">
+            <div class="db-name">deploy-frontend.ps1</div>
+            <div class="db-desc">프론트엔드 빌드 & 배포</div>
+        </div>
+        <div class="db-item">
+            <div class="db-name">setup-db.ps1</div>
+            <div class="db-desc">DB 초기화</div>
+        </div>
+        <div class="db-item">
+            <div class="db-name">server-setup.sh</div>
+            <div class="db-desc">서버 환경 구성</div>
+        </div>
+    </div>
+    <div class="slide-number">8 / 10</div>
+</div>
+
+<!-- 9. 트러블슈팅 -->
+<div class="slide">
+    <h2>트러블슈팅 & 문제 해결</h2>
+    
+    <div class="grid-2">
+        <div class="card">
+            <h3>WebSocket 연결 오류</h3>
+            <p style="font-size: 12px; color: rgba(0,0,0,0.6); margin-bottom: 8px;">문제: Nginx 프록시 환경에서 WebSocket 핸드셰이크 실패</p>
+            <div class="highlight" style="margin-top: 8px;">
+                <p style="font-size: 12px;"><strong>해결:</strong> Nginx에 WebSocket 업그레이드 헤더 설정 추가</p>
+                <p style="font-size: 11px; color: rgba(0,0,0,0.5); margin-top: 4px;">proxy_set_header Upgrade $http_upgrade</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>CORS 정책 오류</h3>
+            <p style="font-size: 12px; color: rgba(0,0,0,0.6); margin-bottom: 8px;">문제: 프론트엔드에서 백엔드 API 호출 시 CORS 에러</p>
+            <div class="highlight" style="margin-top: 8px;">
+                <p style="font-size: 12px;"><strong>해결:</strong> Spring Security에 CORS 설정 추가 및 허용 도메인 지정</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>JWT 토큰 만료 처리</h3>
+            <p style="font-size: 12px; color: rgba(0,0,0,0.6); margin-bottom: 8px;">문제: 토큰 만료 시 사용자 경험 저하</p>
+            <div class="highlight" style="margin-top: 8px;">
+                <p style="font-size: 12px;"><strong>해결:</strong> Axios 인터셉터에서 401 응답 시 자동 로그아웃 및 리다이렉트</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>EC2 메모리 부족</h3>
+            <p style="font-size: 12px; color: rgba(0,0,0,0.6); margin-bottom: 8px;">문제: 프리티어 EC2에서 Spring Boot 빌드 시 메모리 부족</p>
+            <div class="highlight" style="margin-top: 8px;">
+                <p style="font-size: 12px;"><strong>해결:</strong> Swap 메모리 2GB 설정으로 안정적인 빌드 환경 구축</p>
+            </div>
+        </div>
+    </div>
+    
+    <h3 style="margin-top: 20px;">배운 점</h3>
+    <div class="grid-3" style="gap: 12px;">
+        <div class="card">
+            <p style="font-size: 13px;"><strong>실시간 통신</strong></p>
+            <p style="font-size: 11px; color: rgba(0,0,0,0.6);">WebSocket/STOMP 프로토콜 이해 및 구현 경험</p>
+        </div>
+        <div class="card">
+            <p style="font-size: 13px;"><strong>서버 운영</strong></p>
+            <p style="font-size: 11px; color: rgba(0,0,0,0.6);">AWS EC2, Nginx, SSL 인증서 등 인프라 경험</p>
+        </div>
+        <div class="card">
+            <p style="font-size: 13px;"><strong>팀 협업</strong></p>
+            <p style="font-size: 11px; color: rgba(0,0,0,0.6);">Git 브랜치 전략, 코드 리뷰, 일정 관리</p>
+        </div>
+    </div>
+    <div class="slide-number">9 / 10</div>
+</div>
+
+<!-- 10. 마무리 -->
+<div class="slide">
+    <div class="center">
+        <p style="font-size: 14px; color: rgba(0,0,0,0.4); margin-bottom: 20px;">서비스 바로가기</p>
+        
+        <a href="https://debate.me.kr" target="_blank" style="font-size: 56px; font-weight: 900; color: #000; text-decoration: none; display: block; margin-bottom: 40px;">debate.me.kr</a>
+        
+        <div style="margin-bottom: 40px;">
+            <span class="tag">Spring Boot</span>
+            <span class="tag">React</span>
+            <span class="tag">WebSocket</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">AWS</span>
+        </div>
+        
+        <p style="font-size: 13px; color: rgba(0,0,0,0.5);">
+            실시간 채팅 · 메인 홈 UI · AWS 서버 · 신고/차단 · 쪽지 · 랭킹 · 마이페이지
+        </p>
+    </div>
+    <div class="slide-number">10 / 10</div>
+</div>
+
+</body>
+</html>
