@@ -31,6 +31,7 @@ export default function ImpactDashboard() {
   const [recentNews, setRecentNews] = useState([]);
 
   useEffect(() => {
+    console.log("API_BASE:", API_BASE);
     loadDashboardData();
   }, []);
 
