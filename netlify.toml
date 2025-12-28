@@ -1,3 +1,15 @@
 [build]
   command = "rm -rf node_modules package-lock.json && npm install && npx vite build"
   publish = "dist"
+
+# Force HTTPS
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
