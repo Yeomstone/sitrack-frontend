@@ -99,13 +99,16 @@ export default function ImpactDashboard() {
   };
 
   const loadDashboardData = async () => {
+    console.log("loadDashboardData called");
     setLoading(true);
     try {
+      console.log("Fetching from:", `${API_BASE}/api/dashboard/summary`);
       // 병렬 API 호출로 성능 최적화
       const [summaryRes, newsRes] = await Promise.all([
         fetch(`${API_BASE}/api/dashboard/summary`),
         fetch(`${API_BASE}/api/positive-news/search?keyword=&page=0&size=4`)
       ]);
+      console.log("Fetch completed, summaryRes.ok:", summaryRes.ok);
 
       const summaryData = summaryRes.ok ? await summaryRes.json() : null;
       const newsData = newsRes.ok ? await newsRes.json() : { content: [], totalElements: 0 };
